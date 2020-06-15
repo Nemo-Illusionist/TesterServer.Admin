@@ -9,3 +9,6 @@ export interface ITest {
   updatedUtc: string;
   deletedUtc: string | null;
 }
+
+export type ITestAdd = Pick<ITest, "name" | "description"> 
+export type ITestEddit = Partial<Pick<ITest, "name" | "description">> & Pick<ITest, "id">

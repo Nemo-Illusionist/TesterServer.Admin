@@ -10743,6 +10743,14 @@ typescript-fsa-reducers@^1.2.1:
   resolved "https://registry.yarnpkg.com/typescript-fsa-reducers/-/typescript-fsa-reducers-1.2.1.tgz#2af1a85f7b88fb0dfb9fa59d5da51a5d7ac6543f"
   integrity sha512-Qgn7zEnAU5n3YEWEL5ooEmIWZl9B4QyXD4Y/0DqpUzF0YuTrcsLa7Lht0gFXZ+xqLJXQwo3fEiTfQTDF1fBnMg==
 
+typescript-fsa-redux-thunk@^2.1.9:
+  version "2.1.9"
+  resolved "http://npmjs.pik.ru/typescript-fsa-redux-thunk/-/typescript-fsa-redux-thunk-2.1.9.tgz#c4e828edafca69625de3d3f6583217bf48cbcfd0"
+  integrity sha512-8SqF3awKrwKc/U/c5Sby/i30w6xTqkdLNdD3JEBzggUYn08BDVu73dHYRktJgp0pOE2DWUL3yajn11T5adLlkw==
+  dependencies:
+    redux-thunk "^2.3.0"
+    typescript-fsa "^3.0.0"
+
 typescript-fsa@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/typescript-fsa/-/typescript-fsa-3.0.0.tgz#3ad1cb915a67338e013fc21f67c9b3e0e110c912"

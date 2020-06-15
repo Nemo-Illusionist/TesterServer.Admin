@@ -11,42 +11,32 @@ export const baseFetch = async <P, R>(
   url: string,
   params: P,
   method: IHttpMethods = 'GET',
-  token: string,
   headers: { [key: string]: string } = {},
 ): Promise<IResponse<R>> => {
   try {
     const bodyObj =
       method !== 'GET' ? { body: JSON.stringify(params) } : {};
-    const res = await fetch(`/api/${url}`, {
+    const response = await fetch(`/api/${url}`, {
       method,
       ...bodyObj,
       headers: {
         Accept: 'application/json, text/plain',
         'Content-Type': 'application/json;charset=UTF-8',
-        Authorization: `Bearer ${token}`,
         ...headers,
       },
     });
-    if (res.status === 401) {
-      return {
-        error: null,
-        message: res.statusText,
-        result: null,
-        status: 401,
-      };
+    if (response.status === 401) {
+      throw new Error("No auth");
+    } else if (!response.status || response.status < 200 || response.status >= 300) {
+      throw await response.json();
     }
-    return {
-      error: null,
-      status: res.status,
-      message: res.statusText,
-      result: await res.json(),
-    };
+    return await response.json()
   } catch (error) {
     return {
+      error: error,
       message: error.message,
       result: null,
-      status: 401,
-      error: error as Error,
-    };
+      status: error.status,
+    }
   }
 };
