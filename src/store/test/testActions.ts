@@ -7,44 +7,50 @@ const create = actionCreatorFactory('TEST');
 const createAsync = asyncFactory(create);
 
 export const getTests = createAsync<{}, ITest[], Error>(
-  'GET_TESTS', async (params, dispatch) => {
-    const url = "admin​/v1​/Test";
-    const res = await baseFetch(url, {}, "GET")
+  'GET_TESTS',
+  async (params, dispatch) => {
+    const url = 'admin​/v1​/Test';
+    const res = await baseFetch(url, {}, 'GET');
+    console.log('@', res);
     if (res.error) {
-      return []
+      return [];
     }
-    return res.result as ITest[]
-  }
+    return res.result as ITest[];
+  },
 );
 export const getTest = createAsync<string, ITest | null, Error>(
-  'GET_TEST', async (id) => {
+  'GET_TEST',
+  async (id) => {
     const url = `admin​/v1​/Test/${id}`;
-    const res = await baseFetch(url, {}, "GET")
+    const res = await baseFetch(url, {}, 'GET');
     if (res.error) {
-      return null
+      return null;
     }
-    return res.result as ITest 
-  }
+    return res.result as ITest;
+  },
 );
 export const createTest = createAsync<ITestAdd, ITest, Error>(
-  'CREATE_TEST', async (params: ITestAdd) => {
+  'CREATE_TEST',
+  async (params: ITestAdd) => {
     const url = `admin​/v1​/Test/`;
-    const res = await baseFetch(url, params, "POST")
+    const res = await baseFetch(url, params, 'POST');
 
-    return res.result as ITest 
-  }
+    return res.result as ITest;
+  },
 );
 export const editTest = createAsync<ITestEddit, ITest, Error>(
-  'EDIT_TEST', async (params: ITestEddit) => {
+  'EDIT_TEST',
+  async (params: ITestEddit) => {
     const url = `admin​/v1​/Test/${params.id}`;
-    const res = await baseFetch(url, params, "PUT")
-    return res.result as ITest 
-  }
+    const res = await baseFetch(url, params, 'PUT');
+    return res.result as ITest;
+  },
 );
 export const deleteTest = createAsync<void, void, Error>(
-  'DELETE_TEST', async (id) => {
+  'DELETE_TEST',
+  async (id) => {
     const url = `admin​/v1​/Test/${id}`;
-    const res = await baseFetch(url, {}, "DELETE")
-    return res.result 
-  }
+    const res = await baseFetch(url, {}, 'DELETE');
+    return res.result;
+  },
 );

@@ -1,18 +1,18 @@
 [
-    {
-        "id": "s5",
-        "name": "Admin"
-    },
-    {
-        "id": "s6",
-        "name": "Moderator"
-    },
-    {
-        "id": "s7",
-        "name": "Lecturer"
-    },
-    {
-        "id": "s8",
-        "name": "Student"
-    }
+	{
+		"id": "f7b718a4-535f-4e91-8b1e-8c65012c8960",
+		"name": "Admin"
+	},
+	{
+		"id": "427912c2-1327-463d-a0fc-5e864528aeb0",
+		"name": "Moderator"
+	},
+	{
+		"id": "6cb9dc41-d6b5-4cd9-b0b8-a085f5742449",
+		"name": "Lecturer"
+	},
+	{
+		"id": "3638240a-0a54-42a6-81fb-3393d7336684",
+		"name": "Student"
+	}
 ]
