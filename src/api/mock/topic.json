@@ -1,0 +1,23 @@
+[
+    {
+        "parent": {
+            "id": "cfa452esw-bve3vds5",
+            "name": "name2"
+        },
+        "author": {
+            "id": "rgewewgws-we534",
+            "name": "vasya"
+        },
+        "name": "topic1",
+        "description": "tpc1"
+    },
+    {
+        "parent": null,
+        "author": {
+            "id": "rgewewgws-we534",
+            "name": "vasya"
+        },
+        "name": "topic2",
+        "description": "tpc2"
+    }
+]

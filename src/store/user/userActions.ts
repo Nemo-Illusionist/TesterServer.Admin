@@ -2,6 +2,7 @@ import { asyncFactory } from 'typescript-fsa-redux-thunk';
 import { actionCreatorFactory } from 'typescript-fsa';
 import { baseFetch } from '../../api/BaseFetch';
 import { IUser, IUserAdd, IUserEdit } from '../../api/dto/UserDto';
+import users from "../../api/mock/user.json"
 
 const create = actionCreatorFactory('USER');
 const createAsync = asyncFactory(create);
@@ -10,11 +11,13 @@ export const getUsers = createAsync<{}, IUser[], Error>(
   'GET_USERS',
   async (params, dispatch) => {
     const url = 'admin/v1/User';
-    const res = await baseFetch(url, {}, 'GET');
-    if (res.error) {
-      return [];
-    }
-    return res.result as IUser[];
+    // const res = await baseFetch(url, {}, 'GET');
+    // if (res.error) {
+    //   return [];
+    // }
+    // console.log(users);
+
+    return users // res.result as IUser[];
   },
 );
 export const getUser = createAsync<string, IUser | null, Error>(

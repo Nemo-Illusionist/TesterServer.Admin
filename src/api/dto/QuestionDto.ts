@@ -19,7 +19,7 @@ export interface IQuestionAdd {
 export interface IQuestion {
   type: number;
   createdUtc: string;
-  eletedUtc: string | null;
+  deletedUtc: string | null;
   id: string;
   name: string;
 }

@@ -1,0 +1,20 @@
+[
+    {
+        "id": "4545ds-vds5",
+        "name": "name1",
+        "description": "string",
+        "author": null,
+        "createdUtc": "string",
+        "updatedUtc": "string",
+        "deletedUtc": null
+    },
+    {
+        "id": "cfa452esw-bve3vds5",
+        "name": "name2",
+        "description": "string",
+        "author": "rgewewgws-we534",
+        "createdUtc": "string",
+        "updatedUtc": "string",
+        "deletedUtc": null
+    }
+]
