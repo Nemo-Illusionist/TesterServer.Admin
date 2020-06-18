@@ -1,11 +1,11 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Typography } from "@material-ui/core"
-import TreeList, { Editing, SearchPanel, Column, RequiredRule, Selection, Sorting, Scrolling, Paging, Pager } from "devextreme-react/tree-list"
+import TreeList, { Editing, SearchPanel, Column, RequiredRule, Selection, Sorting, Scrolling, Paging, Pager, HeaderFilter } from "devextreme-react/tree-list"
 import { IAppState } from "../../core/mainReducer"
 import { getUsers } from "../../store/user/userActions"
-
-const allowedPageSizes = [5, 10, 20];
+import { onCellPreparedDel } from "../../utils/helpSelectors"
+import { Page } from "../../utils/page"
 
 export const Users = () => {
     const dispatch = useDispatch()
@@ -14,8 +14,6 @@ export const Users = () => {
     useEffect(() => {
         dispatch(getUsers())
     }, [dispatch])
-
-    console.log(selector.users)
 
     return (
         <Typography>
@@ -26,16 +24,11 @@ export const Users = () => {
                 showBorders={true}
                 columnAutoWidth={true}
                 keyExpr="id"
-            // onCellPrepared={onCellPrepared}
+                onCellPrepared={onCellPreparedDel}
             >
+                <HeaderFilter visible={true} />
                 <Scrolling mode="standard" />
-                <Paging
-                    enabled={true}
-                    defaultPageSize={5} />
-                <Pager
-                    showPageSizeSelector={true}
-                    allowedPageSizes={allowedPageSizes}
-                    showInfo={true} />
+                <Page />
                 <Sorting mode="multiple" />
                 <Selection mode="single" />
                 <SearchPanel visible={true} />
