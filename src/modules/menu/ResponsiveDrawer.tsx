@@ -17,6 +17,8 @@ import { Route } from 'react-router-dom';
 import { Profile } from "../../components/profile/Profile"
 import { Greeting } from "../greeting/Greeting"
 import { Test } from "../test/Test"
+import { Question } from "../question/Question"
+import { Topic } from "../topic/Topic"
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -121,7 +123,7 @@ export const ResponsiveDrawer = () => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap>
+                    <Typography variant="h4" noWrap>
                         Тестер
                     </Typography>
                     <Typography className={classes.profile}>
@@ -160,7 +162,7 @@ export const ResponsiveDrawer = () => {
             </nav>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Typography paragraph>
+                <Typography paragraph component={"div"}>
                     <Route path={"/users/"}>
                         <Users />
                     </Route>
@@ -169,6 +171,12 @@ export const ResponsiveDrawer = () => {
                     </Route>
                     <Route path={"/tests/"}>
                         <Test />
+                    </Route>
+                    <Route path={"/questions/"}>
+                        <Question />
+                    </Route>
+                    <Route path={"/themes/"}>
+                        <Topic />
                     </Route>
                 </Typography>
             </main>

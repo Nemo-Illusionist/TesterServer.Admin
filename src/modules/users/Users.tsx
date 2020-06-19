@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Typography } from "@material-ui/core"
-import TreeList, { Editing, SearchPanel, Column, RequiredRule, Selection, Sorting, Scrolling, Paging, Pager, HeaderFilter } from "devextreme-react/tree-list"
+import TreeList, { Editing, SearchPanel, Column, RequiredRule, Selection, Sorting, Scrolling, HeaderFilter } from "devextreme-react/tree-list"
 import { IAppState } from "../../core/mainReducer"
 import { getUsers } from "../../store/user/userActions"
 import { onCellPreparedDel } from "../../utils/helpSelectors"
@@ -16,49 +15,47 @@ export const Users = () => {
     }, [dispatch])
 
     return (
-        <Typography>
-            <TreeList
-                id="roles"
-                dataSource={selector.users}
-                showRowLines={true}
-                showBorders={true}
-                columnAutoWidth={true}
-                keyExpr="id"
-                onCellPrepared={onCellPreparedDel}
-            >
-                <HeaderFilter visible={true} />
-                <Scrolling mode="standard" />
-                <Page />
-                <Sorting mode="multiple" />
-                <Selection mode="single" />
-                <SearchPanel visible={true} />
-                <Editing
-                    allowUpdating={true}
-                    allowDeleting={true}
-                    allowAdding={true}
-                    mode="row"
-                />
-                <Column
-                    caption={"Номер"}
-                    visible={false}
-                    dataField={"id"}>
-                </Column>
-                <Column
-                    caption={"Имя"}
-                    dataField={"name"}>
-                    <RequiredRule />
-                </Column>
-                <Column
-                    caption={"Отчество"}
-                    dataField={"lastName"}>
-                    <RequiredRule />
-                </Column>
-                <Column
-                    caption={"Логин"}
-                    dataField={"login"}>
-                    <RequiredRule />
-                </Column>
-            </TreeList>
-        </Typography>
+        <TreeList
+            id="roles"
+            dataSource={selector.users}
+            showRowLines={true}
+            showBorders={true}
+            columnAutoWidth={true}
+            keyExpr="id"
+            onCellPrepared={onCellPreparedDel}
+        >
+            <HeaderFilter visible={true} />
+            <Scrolling mode="standard" />
+            <Page />
+            <Sorting mode="multiple" />
+            <Selection mode="single" />
+            <SearchPanel visible={true} />
+            <Editing
+                allowUpdating={true}
+                allowDeleting={true}
+                allowAdding={true}
+                mode="row"
+            />
+            <Column
+                caption={"Номер"}
+                visible={false}
+                dataField={"id"}>
+            </Column>
+            <Column
+                caption={"Имя"}
+                dataField={"name"}>
+                <RequiredRule />
+            </Column>
+            <Column
+                caption={"Отчество"}
+                dataField={"lastName"}>
+                <RequiredRule />
+            </Column>
+            <Column
+                caption={"Логин"}
+                dataField={"login"}>
+                <RequiredRule />
+            </Column>
+        </TreeList>
     )
 }

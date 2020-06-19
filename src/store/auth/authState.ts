@@ -14,7 +14,7 @@ const initialState: IAuthState = {
   loadState: false,
 };
 
-export const userReducer = reducerWithInitialState<IAuthState>(
+export const authReducer = reducerWithInitialState<IAuthState>(
   initialState,
 )
   .case(authorization.async.started, (state) => ({

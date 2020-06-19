@@ -1,28 +1,28 @@
 import React, { useEffect } from "react"
-import { IAppState } from "../../core/mainReducer";
-import { useDispatch, useSelector } from "react-redux";
-import { getTests } from "../../store/test/testActions";
+import { useDispatch, useSelector } from "react-redux"
 import TreeList, { Editing, SearchPanel, Column, RequiredRule, Selection, Sorting, Scrolling, HeaderFilter } from "devextreme-react/tree-list"
-import { onCellPrepared } from "../../utils/helpSelectors"
+import { IAppState } from "../../core/mainReducer"
+import { getTopics } from "../../store/topic/topicActions"
+import { onCellPreparedDel } from "../../utils/helpSelectors"
 import { Page } from "../../utils/page"
 
-export const Test = () => {
+export const Topic = () => {
     const dispatch = useDispatch()
-    const selector = useSelector((state: IAppState) => state.test)
+    const selector = useSelector((state: IAppState) => state.topic)
 
     useEffect(() => {
-        dispatch(getTests())
+        dispatch(getTopics())
     }, [dispatch])
 
     return (
         <TreeList
             id="roles"
-            dataSource={selector.tests}
+            dataSource={selector.topics}
             showRowLines={true}
             showBorders={true}
             columnAutoWidth={true}
             keyExpr="id"
-            onCellPrepared={onCellPrepared}
+            onCellPrepared={onCellPreparedDel}
         >
             <HeaderFilter visible={true} />
             <Scrolling mode="standard" />
@@ -42,7 +42,12 @@ export const Test = () => {
                 dataField={"id"}>
             </Column>
             <Column
-                caption={"Имя"}
+                caption={"Тест"}
+                dataField={"parent.name"}>
+                <RequiredRule />
+            </Column>
+            <Column
+                caption={"Тема"}
                 dataField={"name"}>
                 <RequiredRule />
             </Column>

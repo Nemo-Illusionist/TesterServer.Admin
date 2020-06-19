@@ -2,6 +2,7 @@ import { asyncFactory } from 'typescript-fsa-redux-thunk';
 import { actionCreatorFactory } from 'typescript-fsa';
 import { baseFetch } from '../../api/BaseFetch';
 import { IQuestion, IQuestionAdd } from '../../api/dto/QuestionDto';
+import questions from '../../api/mock/question.json';
 
 const create = actionCreatorFactory('QUESTION');
 const createAsync = asyncFactory(create);
@@ -10,11 +11,11 @@ export const getQuestions = createAsync<{}, IQuestion[], Error>(
   'GET_QUESTIONS',
   async (params, dispatch) => {
     const url = 'admin/v1/Question';
-    const res = await baseFetch(url, {}, 'GET');
-    if (res.error) {
-      return [];
-    }
-    return res.result as IQuestion[];
+    // const res = await baseFetch(url, {}, 'GET');
+    // if (res.error) {
+    //   return [];
+    // }
+    return questions; // res.result as IQuestion[];
   },
 );
 

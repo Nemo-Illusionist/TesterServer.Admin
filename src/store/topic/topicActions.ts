@@ -6,6 +6,7 @@ import {
   ITopicAdd,
   ITopicEdit,
 } from '../../api/dto/TopicDto';
+import topics from '../../api/mock/topic.json';
 
 const create = actionCreatorFactory('TOPIC');
 const createAsync = asyncFactory(create);
@@ -14,11 +15,11 @@ export const getTopics = createAsync<{}, ITopic[], Error>(
   'GET_TOPICS',
   async (params, dispatch) => {
     const url = 'admin/v1/Topic';
-    const res = await baseFetch(url, {}, 'GET');
-    if (res.error) {
-      return [];
-    }
-    return res.result as ITopic[];
+    // const res = await baseFetch(url, {}, 'GET');
+    // if (res.error) {
+    //   return [];
+    // }
+    return topics; //res.result as ITopic[];
   },
 );
 export const getTopic = createAsync<string, ITopic | null, Error>(

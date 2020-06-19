@@ -7,15 +7,17 @@ interface IParent {
 
 export interface ITopic {
   parent: IParent | null;
-  author: IAuthor;
+  // author: IAuthor;
   name: string;
-  description?: string;
+  id: string;
+  createdUtc: string;
+  updatedUtc: string;
+  deletedUtc: string | null;
 }
 
 export interface ITopicAdd {
   parentId?: string;
   name: string;
-  description?: string;
 }
 
 export type ITopicEdit = Partial<ITopicAdd> & { id: string };

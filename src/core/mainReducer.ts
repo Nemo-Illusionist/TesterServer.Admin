@@ -5,6 +5,7 @@ import { questionReducer } from '../store/question/questionState';
 import { userReducer } from '../store/user/userState';
 import { topicReducer } from '../store/topic/topicState';
 import { roleReducer } from '../store/role/roleState';
+import { authReducer } from '../store/auth/authState';
 
 export const createMainReducer = () =>
   combineReducers({
@@ -13,6 +14,7 @@ export const createMainReducer = () =>
     user: userReducer,
     topic: topicReducer,
     role: roleReducer,
+    auth: authReducer,
   });
 
 export interface IAppState

@@ -1,23 +1,24 @@
 import React, { useEffect } from "react"
 import { IAppState } from "../../core/mainReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { getTests } from "../../store/test/testActions";
+import { getQuestions } from "../../store/question/questionActions";
 import TreeList, { Editing, SearchPanel, Column, RequiredRule, Selection, Sorting, Scrolling, HeaderFilter } from "devextreme-react/tree-list"
 import { onCellPrepared } from "../../utils/helpSelectors"
 import { Page } from "../../utils/page"
 
-export const Test = () => {
+export const Question = () => {
     const dispatch = useDispatch()
-    const selector = useSelector((state: IAppState) => state.test)
+    const selector = useSelector((state: IAppState) => state.question)
 
     useEffect(() => {
-        dispatch(getTests())
+        dispatch(getQuestions())
     }, [dispatch])
+
 
     return (
         <TreeList
             id="roles"
-            dataSource={selector.tests}
+            dataSource={selector.questions}
             showRowLines={true}
             showBorders={true}
             columnAutoWidth={true}
@@ -44,6 +45,11 @@ export const Test = () => {
             <Column
                 caption={"Имя"}
                 dataField={"name"}>
+                <RequiredRule />
+            </Column>
+            <Column
+                caption={"Тип вопроса"}
+                dataField={"type"}>
                 <RequiredRule />
             </Column>
         </TreeList>

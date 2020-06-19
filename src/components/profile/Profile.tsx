@@ -38,7 +38,7 @@ export const Profile = () => {
     const classes = useStyles();
 
     return (
-        <div>
+        <>
             <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -46,7 +46,7 @@ export const Profile = () => {
                 onClick={handleMenu}
                 color="inherit"
             >
-                <Typography>Профиль</Typography>
+                <Typography component={"div"}>Профиль</Typography>
             </IconButton>
             <Menu
                 id="menu-appbar"
@@ -64,13 +64,13 @@ export const Profile = () => {
                 onClose={handleClose}
 
             >
-                <div className={classes.card}>
+                <Typography component={"div"} className={classes.card}>
                     <MenuItem className={classes.img} onClick={handleClose}><AccountCircle /></MenuItem>
                     <MenuItem onClick={handleClose}>Александр</MenuItem>
                     <MenuItem onClick={handleClose}>Админ</MenuItem>
                     <Button onClick={logoutHandler} color="inherit">Выйти</Button>
-                </div>
+                </Typography>
             </Menu>
-        </div>
+        </>
     )
 }

@@ -1,5 +1,5 @@
 export interface IAuthRequest {
-  logis: string;
+  login: string;
   password: string;
 }
 
