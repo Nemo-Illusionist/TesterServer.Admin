@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -9,9 +9,9 @@ import boy from "../../resources/boy.svg"
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { CircularProgress } from '@material-ui/core';
-import { PositionedSnackbar } from '../../components/snackbar/SnackbarResult';
 import { IAppState } from "../../core/mainReducer";
 import { authorization } from "../../store/auth/authActions"
+import { useCookies } from 'react-cookie';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
+        width: '100%',
         marginTop: theme.spacing(1),
     },
     submit: {
@@ -50,81 +50,67 @@ const useStyles = makeStyles((theme) => ({
 export const SignIn = () => {
     const [login_text, setLogin] = useState('');
     const [pass_text, setPass] = useState('');
-    const [open, setOpen] = useState(false);
     const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
     const selector = useSelector((state: IAppState) => state.auth);
+    const [cookies, setCookie] = useCookies(['access_token']);
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-        const onSuccess = () => {
+    const handleClick = async () => {
+        const res = await dispatch(authorization({ login: login_text, password: pass_text }))
+        if (res) {
+            setCookie("access_token", res, { path: "/", httpOnly: true });
+            history.push('/');
         }
-        history.push('/');
     }
-    const handleClick = () => {
-        dispatch(authorization({ login: login_text, password: pass_text }))
-        // handleOpen();
-    }
-
 
     return (
         <>
             {selector.loadState ? <CircularProgress className={classes.centerScreen} /> :
-                <div>
-                    <PositionedSnackbar
-                        text={"error"}
-                        handleClose={handleClose}
-                        open={open}
-                    />
-                    <Container component="main" maxWidth="xs">
-                        <CssBaseline />
-                        <div className={classes.paper}>
-                            <img className={classes.img} src={boy} alt="boy" />
-                            <Typography className={classes.authText} component="h1" variant="h4">
-                                Авторизация
+                <Container component="main" maxWidth="xs">
+                    <CssBaseline />
+                    <div className={classes.paper}>
+                        <img className={classes.img} src={boy} alt="boy" />
+                        <Typography className={classes.authText} component="h1" variant="h4">
+                            Авторизация
                         </Typography>
-                            <form className={classes.form} noValidate>
-                                <TextField
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="text"
-                                    type="text"
-                                    label="Логин"
-                                    name="text"
-                                    autoFocus
-                                    onChange={x => setLogin(x.target.value)}
-                                />
-                                <TextField
-                                    variant="outlined"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Пароль"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="current-password"
-                                    onChange={x => setPass(x.target.value)}
-                                />
-                                <Button
-                                    onClick={handleClick}
-                                    className={classes.submit}
-                                    variant="contained"
-                                    color="primary"
-                                    fullWidth
-                                >
-                                    Авторизироваться
-                                </Button>
-                            </form>
-                        </div>
-                    </Container>
-                </div>
+                        <form className={classes.form} noValidate>
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="text"
+                                type="text"
+                                label="Логин"
+                                name="text"
+                                autoFocus
+                                onChange={x => setLogin(x.target.value)}
+                            />
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="password"
+                                label="Пароль"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                                onChange={x => setPass(x.target.value)}
+                            />
+                            <Button
+                                onClick={handleClick}
+                                className={classes.submit}
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                            >
+                                Авторизироваться
+                            </Button>
+                        </form>
+                    </div>
+                </Container>
             }
         </>
     )

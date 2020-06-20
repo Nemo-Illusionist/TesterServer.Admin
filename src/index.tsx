@@ -9,6 +9,7 @@ import { IAppDispatch } from './core/mainReducer';
 import { configureStore } from './core/configureStore';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Router } from 'react-router-dom';
+import { CookiesProvider } from 'react-cookie';
 
 export const history = createBrowserHistory({ basename: process.env.PUBLIC_URL });
 export const { store, persistor } = configureStore();
@@ -19,7 +20,9 @@ ReactDOM.render(
     <Router history={history}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <App />
+          <CookiesProvider>
+            <App />
+          </CookiesProvider>
         </PersistGate>
       </Provider>
     </Router>
