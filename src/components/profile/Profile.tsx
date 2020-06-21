@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { Typography, makeStyles, Theme, createStyles, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -22,6 +23,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Profile = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -33,6 +36,8 @@ export const Profile = () => {
     const history = useHistory();
     const logoutHandler = () => {
         // dispath(logout())
+        removeCookie("access_token");
+
         history.push('/auth/')
     }
     const classes = useStyles();
