@@ -8,10 +8,10 @@ import Container from '@material-ui/core/Container';
 import boy from "../../resources/boy.svg"
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { CircularProgress } from '@material-ui/core';
 import { IAppState } from "../../core/mainReducer";
 import { authorization } from "../../store/auth/authActions"
 import { useCookies } from 'react-cookie';
+import { Loading } from "../../components/loading/Loading"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -54,6 +54,7 @@ export const SignIn = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const selector = useSelector((state: IAppState) => state.auth);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [cookies, setCookie] = useCookies(['access_token']);
 
     const handleClick = async () => {
@@ -65,53 +66,51 @@ export const SignIn = () => {
     }
 
     return (
-        <>
-            {selector.loadState ? <CircularProgress className={classes.centerScreen} /> :
-                <Container component="main" maxWidth="xs">
-                    <CssBaseline />
-                    <div className={classes.paper}>
-                        <img className={classes.img} src={boy} alt="boy" />
-                        <Typography className={classes.authText} component="h1" variant="h4">
-                            Авторизация
+        <Loading loading={selector.loadState}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <div className={classes.paper}>
+                    <img className={classes.img} src={boy} alt="boy" />
+                    <Typography className={classes.authText} component="h1" variant="h4">
+                        Авторизация
                         </Typography>
-                        <form className={classes.form} noValidate>
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="text"
-                                type="text"
-                                label="Логин"
-                                name="text"
-                                autoFocus
-                                onChange={x => setLogin(x.target.value)}
-                            />
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Пароль"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                onChange={x => setPass(x.target.value)}
-                            />
-                            <Button
-                                onClick={handleClick}
-                                className={classes.submit}
-                                variant="contained"
-                                color="primary"
-                                fullWidth
-                            >
-                                Авторизироваться
+                    <form className={classes.form} noValidate>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="text"
+                            type="text"
+                            label="Логин"
+                            name="text"
+                            autoFocus
+                            onChange={x => setLogin(x.target.value)}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Пароль"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            onChange={x => setPass(x.target.value)}
+                        />
+                        <Button
+                            onClick={handleClick}
+                            className={classes.submit}
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                        >
+                            Авторизироваться
                             </Button>
-                        </form>
-                    </div>
-                </Container>
-            }
-        </>
+                    </form>
+                </div>
+            </Container>
+        </Loading>
     )
 }

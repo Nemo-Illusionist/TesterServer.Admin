@@ -1,23 +1,24 @@
 import React, { useEffect } from "react"
 import { IAppState } from "../../core/mainReducer";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { getTests } from "../../store/test/testActions";
 import TreeList, { Editing, SearchPanel, Column, RequiredRule, Selection, Sorting, Scrolling, HeaderFilter } from "devextreme-react/tree-list"
 import { onCellPrepared } from "../../utils/helpSelectors"
 import { Page } from "../../utils/page"
 
-export const Test = () => {
+export const Test = React.memo(() => {
     const dispatch = useDispatch()
-    const selector = useSelector((state: IAppState) => state.test)
+    const { tests } = useSelector((state: IAppState) => ({ tests: state.test.tests }), shallowEqual)
 
     useEffect(() => {
         dispatch(getTests())
     }, [dispatch])
+    console.log(tests?.data);
 
     return (
         <TreeList
             id="roles"
-            dataSource={selector.tests}
+            dataSource={tests?.data}
             showRowLines={true}
             showBorders={true}
             columnAutoWidth={true}
@@ -48,4 +49,4 @@ export const Test = () => {
             </Column>
         </TreeList>
     )
-}
+})

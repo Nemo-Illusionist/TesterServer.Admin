@@ -1,10 +1,14 @@
+import {createBrowserHistory} from "history";
+
+const history = createBrowserHistory();
+
 export type IHttpMethods = "GET" | "POST" | "PUT" | "DELETE";
 
 interface IResponse<R> {
-    result: R | null;
-    status: number;
-    error: Error | null;
-    message: string | null;
+    result?: R | null;
+    status?: number;
+    error?: Error | null;
+    message?: string | null;
 }
 
 export const baseFetch = async <P, R>(
@@ -26,6 +30,7 @@ export const baseFetch = async <P, R>(
             },
         });
         if (response.status === 401) {
+            history.push("/auth/");
             throw new Error("No auth");
         } else if (!response.status || response.status < 200 || response.status >= 300) {
             throw await response.json();

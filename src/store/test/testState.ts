@@ -1,16 +1,16 @@
 import {reducerWithInitialState} from "typescript-fsa-reducers";
-import {ITest} from "../../api/dto/TestDto";
+import {ITest, ITests} from "../../api/dto/TestDto";
 import {getTest, getTests} from "./testActions";
 
 export interface ITestState {
     loadState: boolean;
     error: Error | null;
-    tests: ITest[];
+    tests: ITests | null;
     test: ITest | null;
 }
 
 const initialState: ITestState = {
-    tests: [],
+    tests: {data: [], meta: {count: 0, page: 0, pageSize: 0}},
     test: null,
     error: null,
     loadState: false,
